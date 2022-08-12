@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:weather/services/location.dart';
 
 class LoadingScreen extends StatefulWidget {
   const LoadingScreen({Key? key}) : super(key: key);
@@ -9,23 +9,21 @@ class LoadingScreen extends StatefulWidget {
 }
 
 class _LoadingScreenState extends State<LoadingScreen> {
-  Future<void> getLocation() async {
-    try {
-      Position position = await Geolocator.getCurrentPosition(
-          desiredAccuracy: LocationAccuracy.low);
-      print(position);
-    } catch (exception) {
-      print(
-          exception); //printing the exception in the console without stoping the execution of the program
-    }
-  }
-
 //throw method is used to create your own exception
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     getLocation();
+  }
+
+  void getLocation() async {
+    Location location = Location();
+    //we can add await to only thoses function which return Future
+    await location.getCurrentLocation();
+    print(location.longitude);
+    print(location.latitude);
   }
 
   @override
