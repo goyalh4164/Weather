@@ -10,11 +10,17 @@ class LoadingScreen extends StatefulWidget {
 
 class _LoadingScreenState extends State<LoadingScreen> {
   Future<void> getLocation() async {
-    Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.low);
-    print(position);
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.low);
+      print(position);
+    } catch (exception) {
+      print(
+          exception); //printing the exception in the console without stoping the execution of the program
+    }
   }
 
+//throw method is used to create your own exception
   @override
   void initState() {
     // TODO: implement initState
