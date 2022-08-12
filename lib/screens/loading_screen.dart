@@ -16,17 +16,25 @@ class _LoadingScreenState extends State<LoadingScreen> {
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getLocation();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: MaterialButton(
-          onPressed: () {
-            getLocation();
-          },
-          child: Text("Get Location"),
-          color: Colors.blueGrey,
-        ),
-      ),
-    );
+        body: Center(
+
+            //   child: MaterialButton(
+            //     onPressed: () {
+            //       getLocation();
+            //     },
+            //     child: Text("Get Location"),
+            //     color: Colors.blueGrey,
+            //   ),
+            // ),
+            ));
   }
 }
