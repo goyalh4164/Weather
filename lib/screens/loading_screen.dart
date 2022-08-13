@@ -28,15 +28,17 @@ class _LoadingScreenState extends State<LoadingScreen> {
     Location location = Location();
     //we can add await to only thoses function which return Future
     await location.getCurrentLocation();
-    longitude = location.longitude;
-    latitude = location.latitude;
+
     NetworkHelper networkHelper = await NetworkHelper(
         url:
-            'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+            'https://api.openweathermap.org/data/2.5/weather?lat=${location.latitude}&lon=${location.longitude}&appid=$apiKey&units=metric');
 
     var weatherData = await networkHelper.getData();
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return LocationScreen();
+      //passing the data from loading screen to the location_screen
+      return LocationScreen(
+        locationWeather: weatherData,
+      );
     }));
   }
 

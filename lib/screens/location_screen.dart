@@ -2,13 +2,36 @@ import 'package:flutter/material.dart';
 import '/utilities/constants.dart';
 
 class LocationScreen extends StatefulWidget {
-  const LocationScreen({Key? key}) : super(key: key);
+  LocationScreen({this.locationWeather});
+  final locationWeather;
 
   @override
   State<LocationScreen> createState() => _LocationScreenState();
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  int condition = 0;
+
+  int temperature = 0;
+  String cityName = "";
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // ---------------IMPORTANT-------------------
+    //widget is used to get the data from Location Screen stateful to _LocationScreenState(basically from above class to this class)
+    //print(widget.locationWeather);
+    //----------------------IMPORTANT-------------
+    updateUI(widget.locationWeather);
+  }
+
+  void updateUI(dynamic weatherData) {
+    condition = weatherData['weather'][0]['id'];
+    double temp = weatherData['main']['temp'];
+    temperature = temp.toInt();
+    cityName = weatherData['name'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,7 +76,7 @@ class _LocationScreenState extends State<LocationScreen> {
                 child: Row(
                   children: [
                     Text(
-                      "32°",
+                      "$temperature°",
                       style: kTempTextStyle,
                     ),
                     Text(
@@ -78,9 +101,3 @@ class _LocationScreenState extends State<LocationScreen> {
     );
   }
 }
-// int condition = decodedData['weather'][0]['id'];
-// double temp = decodedData['main']['temp'];
-// String cityName = decodedData['name'];
-// print(condition);
-// print(temp);
-// print(cityName);
