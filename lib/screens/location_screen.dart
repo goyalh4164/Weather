@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather/screens/city_screen.dart';
 import 'package:weather/services/weather.dart';
 import '/utilities/constants.dart';
 
@@ -80,7 +81,16 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return CityScreen();
+                          },
+                        ),
+                      );
+                    },
                     child: Icon(
                       Icons.location_city,
                       size: 50.0,
