@@ -81,8 +81,8 @@ class _LocationScreenState extends State<LocationScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      Navigator.push(
+                    onTap: () async {
+                      var typeName = await Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) {
@@ -90,6 +90,11 @@ class _LocationScreenState extends State<LocationScreen> {
                           },
                         ),
                       );
+                      if (typeName != null) {
+                        var weatherData =
+                            await weather.getCityWeather(typeName);
+                        updateUI(weatherData);
+                      }
                     },
                     child: Icon(
                       Icons.location_city,
